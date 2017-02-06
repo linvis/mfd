@@ -16,9 +16,74 @@
     // Do any additional setup after loading the view.
 }
 
+- (NSString*)run_cmd:(NSString*)cmd {
+    NSTask *task;
+    task = [[NSTask alloc] init];
+    [task setLaunchPath: @"/bin/sh"];
+    
+    [task setArguments: @[@"-c", cmd]];
+    
+    NSPipe *pipe;
+    pipe = [NSPipe pipe];
+    [task setStandardOutput: pipe];
+    
+    NSFileHandle *file;
+    file = [pipe fileHandleForReading];
+    
+    [task launch];
+    
+    NSData *data;
+    data = [file readDataToEndOfFile];
+    
+    
+    
+    NSString *string;
+    string = [[NSString alloc] initWithData: data
+                                   encoding: NSUTF8StringEncoding];
+    
+    return string;
+    
+}
+
+- (NSString*)run_mdfind_cmd:(NSString*)input {
+    NSString *base_cmd = @"/Users/LilyC/mfd/mfd";
+    
+    NSString *cmd;
+    cmd = [NSString stringWithFormat: @"%@ -q %@", base_cmd, input];
+    NSLog(@"cmd is: %@", cmd);
+    NSString *output = [self performSelector:@selector(run_cmd:) withObject:cmd];
+    
+    return output;
+}
+
+- (NSString*)run_ln_cmd:(NSString*)input {
+    NSString *base_cmd_1 = @"ln -s";
+    NSString *base_cmd_2 = @"/Users/LilyC/Desktop/atest";
+    
+    NSString *cmd;
+
+    //NSLog(@"cmd is: %@", cmd);
+    input = [input stringByReplacingOccurrencesOfString :@" " withString:@"\\ "];
+    input = [input stringByReplacingOccurrencesOfString :@"-" withString:@"\\-"];
+    input = [input stringByReplacingOccurrencesOfString :@"&" withString:@"\\&"];
+    NSRange range=[input rangeOfString:@"/" options:NSBackwardsSearch];
+
+    NSString *file_name = [input substringFromIndex:range.location];
+    NSLog(@"file name is: %@", file_name);
+    
+    
+    cmd = [NSString stringWithFormat: @"%@ %@ %@/link_%@", base_cmd_1, input, base_cmd_2,[file_name substringFromIndex:1]];
+    
+    NSLog(@"the ln command is: %@", cmd);
+    
+    NSString *output = [self performSelector:@selector(run_cmd:) withObject:cmd];
+    
+    return output;
+}
+
 - (IBAction)button_click:(id)sender {
     
-    NSString *base_cmd = @"/Users/LilyC/mfd/mfd";
+    
     
     NSString *kwString = [self.text_kw stringValue];
     NSLog(@"the button is press");
@@ -45,35 +110,30 @@
     
     //NSLog(@" %@", output);
     
-    NSTask *task;
-    task = [[NSTask alloc] init];
-    [task setLaunchPath: @"/bin/sh"];
+    NSString *file_list = [self performSelector:@selector(run_mdfind_cmd:) withObject:kwString];
     
-    //NSArray *arguments;
-    //arguments = [NSArray arrayWithObjects: @[@"-c", @"/Users/LilyC/mfd/mfd -q 米家台灯"],nil];
-    NSString *cmd;
-    cmd = [NSString stringWithFormat: @"%@ -q %@", base_cmd, kwString];
-    NSLog(@"cmd is: %@", cmd);
-    [task setArguments: @[@"-c", cmd]];
-    
-    NSPipe *pipe;
-    pipe = [NSPipe pipe];
-    [task setStandardOutput: pipe];
-    
-    NSFileHandle *file;
-    file = [pipe fileHandleForReading];
-    
-    [task launch];
-    
-    NSData *data;
-    data = [file readDataToEndOfFile];
+    NSLog(@"file list is:%@", file_list);
     
     
+    while (1) {
+        if ([file_list length] == 0)
+            break;
+        NSRange range = [file_list rangeOfString:@"\n"];
+        
+        NSString *file_path = [file_list substringToIndex:range.location];
+
+        NSLog(@"the file path is:%@", file_path);
+        
+        NSString *file_name = [self performSelector:@selector(run_ln_cmd:) withObject:file_path];
+        
+        NSLog(@"the length is:%d %d", range.location, [file_list length]);
+        NSLog(@"the rest is:%@", file_list);
+        file_list = [file_list substringFromIndex:(range.location + 1)];
+    }
     
-    NSString *string;
-    string = [[NSString alloc] initWithData: data
-                                   encoding: NSUTF8StringEncoding];
-    NSLog (@"woop!  got\n%@", string);
+    
+    NSArray *fileURLs = [NSArray arrayWithObjects:@"/Users/LilyC/Desktop/atest", nil];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -81,6 +141,7 @@
 
     // Update the view, if already loaded.
 }
+
 
 
 @end
