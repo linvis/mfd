@@ -14,6 +14,7 @@
 		0A7B04DA1E475635000B2830 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7B04D81E475635000B2830 /* Main.storyboard */; };
 		0A7B04E51E475635000B2830 /* mfdTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B04E41E475635000B2830 /* mfdTests.m */; };
 		0A7B04F01E475635000B2830 /* mfdUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B04EF1E475635000B2830 /* mfdUITests.m */; };
+		0ADDB68D1E4F121E00F26A7C /* ViewSave.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDB68C1E4F121E00F26A7C /* ViewSave.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		0A7B04EB1E475635000B2830 /* mfdUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mfdUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7B04EF1E475635000B2830 /* mfdUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mfdUITests.m; sourceTree = "<group>"; };
 		0A7B04F11E475635000B2830 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ADDB68C1E4F121E00F26A7C /* ViewSave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSave.m; sourceTree = "<group>"; };
+		0ADDB68E1E4F122500F26A7C /* ViewSave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSave.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 		0A7B04CC1E475635000B2830 /* mfd */ = {
 			isa = PBXGroup;
 			children = (
+				0ADDB68E1E4F122500F26A7C /* ViewSave.h */,
+				0ADDB68C1E4F121E00F26A7C /* ViewSave.m */,
 				0A7B04CD1E475635000B2830 /* AppDelegate.h */,
 				0A7B04CE1E475635000B2830 /* AppDelegate.m */,
 				0A7B04D31E475635000B2830 /* ViewController.h */,
@@ -272,6 +277,7 @@
 				0A7B04D51E475635000B2830 /* ViewController.m in Sources */,
 				0A7B04D21E475635000B2830 /* main.m in Sources */,
 				0A7B04CF1E475635000B2830 /* AppDelegate.m in Sources */,
+				0ADDB68D1E4F121E00F26A7C /* ViewSave.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +504,7 @@
 				0A7B04F61E475635000B2830 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A7B04F71E475635000B2830 /* Build configuration list for PBXNativeTarget "mfdTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +513,7 @@
 				0A7B04F91E475635000B2830 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A7B04FA1E475635000B2830 /* Build configuration list for PBXNativeTarget "mfdUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +522,7 @@
 				0A7B04FC1E475635000B2830 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -38,6 +38,11 @@
 @property (strong) IBOutlet NSButton *name_select;
 
 
+@property (strong) IBOutlet NSButton *save_search;
+
+@property (strong) IBOutlet NSComboBox *save_list;
+@property (strong) IBOutlet NSButton *save_list_select;
+
 
 @end
 
