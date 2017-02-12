@@ -20,12 +20,12 @@ NSString *result_path;
     int8_t month_num = 1;
     int8_t year_num = 0;
     
-    [self.md_start_month setStringValue:@"1月"];
+    [self.md_start_month setStringValue:@"1月1日"];
     [self.md_stop_month setStringValue:@"今天"];
-    [self.cr_start_month setStringValue:@"1月"];
-    [self.cr_stop_month setStringValue:@"1月"];
+    [self.cr_start_month setStringValue:@"1月日"];
+    [self.cr_stop_month setStringValue:@"1月日"];
     for (; month_num <= 12; month_num++) {
-        NSString *month = [NSString stringWithFormat:@"%d月", month_num];
+        NSString *month = [NSString stringWithFormat:@"%d月1日", month_num];
         [self.md_start_month addItemWithObjectValue: month];
         [self.md_stop_month addItemWithObjectValue: month];
         [self.cr_start_month addItemWithObjectValue: month];
@@ -255,7 +255,7 @@ NSString *str_file;
         if ([self.text_kw stringValue].length != 0) {
             str_kw = [self.text_kw stringValue];
             if ([self.name_select state] == 0) {
-                str_combo_cmd = [NSString stringWithFormat: @"(true) && kMDItemTextContent == \"%@\" || kMDItemFSName ==\"*%@*\"cdw", str_kw, str_kw];
+                str_combo_cmd = [NSString stringWithFormat: @"(true) && (kMDItemTextContent == \"%@\" || kMDItemFSName ==\"*%@*\"cdw)", str_kw, str_kw];
                 NSLog(@"keyword is: %@", str_combo_cmd);
             } else {
                 str_combo_cmd = [NSString stringWithFormat: @"(true) && kMDItemFSName ==\"*%@*\"cdw", str_kw];
@@ -310,7 +310,7 @@ NSString *str_file;
             index = [self.md_start_month indexOfSelectedItem];
             index = (index == -1) ? 0 : index;
             month = [self.md_start_month itemObjectValueAtIndex:index];
-            time_st = [NSString stringWithFormat:@"%@%@1日", year, month];
+            time_st = [NSString stringWithFormat:@"%@%@", year, month];
             
             //get modify end time
             index = [self.md_stop_year indexOfSelectedItem];
@@ -326,7 +326,7 @@ NSString *str_file;
                 [dateFormatter setDateFormat:@"YYYY年MM月dd日"];
                 time_end = [dateFormatter stringFromDate:currentDate];
             } else {
-                time_end = [NSString stringWithFormat:@"%@%@1日", year, month];
+                time_end = [NSString stringWithFormat:@"%@%@", year, month];
             }
             
             
@@ -448,7 +448,7 @@ NSString *str_file;
                     default:
                         break;
                 }
-                str_combo_cmd = [NSString stringWithFormat:@"%@ && %@", str_combo_cmd, str_file_type];
+                str_combo_cmd = [NSString stringWithFormat:@"%@ && (%@)", str_combo_cmd, str_file_type];
             }
         }
         

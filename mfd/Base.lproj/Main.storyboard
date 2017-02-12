@@ -664,7 +664,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" identifier="fsaf" title="GUI搜索V2.3" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" identifier="fsaf" title="GUI搜索V2.4" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -917,6 +917,7 @@
                         <outlet property="file_type" destination="6d3-Q2-hNx" id="LwN-Ol-ZXQ"/>
                         <outlet property="loading" destination="22n-5b-aDC" id="axR-2b-xdE"/>
                         <outlet property="md_sel_coarse" destination="R9f-4u-pBK" id="seO-TI-QWB"/>
+                        <outlet property="md_sel_fine" destination="qBf-fr-Re5" id="Fmz-Vq-EnR"/>
                         <outlet property="md_start_month" destination="Zde-yW-Lhi" id="hzd-Bm-OvR"/>
                         <outlet property="md_start_year" destination="9EB-jj-meS" id="78J-u1-aHF"/>
                         <outlet property="md_stop_month" destination="EOJ-bC-ARR" id="orU-cE-mEq"/>
