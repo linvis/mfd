@@ -3,7 +3,6 @@
 //  mfd
 //
 //  Created by shlin on 2017/2/11.
-//  Copyright © 2017年 LilyC. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

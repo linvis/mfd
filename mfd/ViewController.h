@@ -2,8 +2,7 @@
 //  ViewController.h
 //  mfd
 //
-//  Created by LilyC on 2017/2/5.
-//  Copyright © 2017年 LilyC. All rights reserved.
+//  Created by Shlin on 2017/2/5.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -43,6 +42,8 @@
 @property (strong) IBOutlet NSComboBox *save_list;
 @property (strong) IBOutlet NSButton *save_list_select;
 
+@property (strong) IBOutlet NSProgressIndicator *loading;
+@property (strong) IBOutlet NSTextField *run_search;
 
 @end
 

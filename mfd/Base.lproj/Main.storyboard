@@ -664,7 +664,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" identifier="fsaf" title="GUI搜索V2.0" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" identifier="fsaf" title="GUI搜索V2.3" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -683,11 +683,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="562" height="501"/>
+                        <rect key="frame" x="0.0" y="0.0" width="562" height="515"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgz-k6-dJA">
-                                <rect key="frame" x="172" y="443" width="44" height="17"/>
+                                <rect key="frame" x="172" y="457" width="44" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="关键字" id="mIU-2P-oNr">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -696,7 +696,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZII-im-jWI">
-                                <rect key="frame" x="236" y="438" width="96" height="22"/>
+                                <rect key="frame" x="236" y="452" width="96" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="vpS-hj-2Sg">
                                     <font key="font" metaFont="system"/>
@@ -705,7 +705,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsW-Wi-Xts">
-                                <rect key="frame" x="165" y="273" width="58" height="17"/>
+                                <rect key="frame" x="165" y="287" width="58" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="起始时间" id="cQ9-jc-RHY">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -714,7 +714,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIZ-Mk-qte">
-                                <rect key="frame" x="165" y="232" width="58" height="17"/>
+                                <rect key="frame" x="165" y="246" width="58" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="终止时间" id="ark-HC-hFo">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -723,7 +723,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNO-6V-Q9U">
-                                <rect key="frame" x="165" y="148" width="58" height="17"/>
+                                <rect key="frame" x="165" y="162" width="58" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="文件类型" id="Yu1-GE-TWB">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -732,7 +732,7 @@
                                 </textFieldCell>
                             </textField>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zde-yW-Lhi">
-                                <rect key="frame" x="235" y="268" width="99" height="26"/>
+                                <rect key="frame" x="235" y="282" width="99" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="12" id="PJw-9w-Hhf">
                                     <font key="font" metaFont="system"/>
@@ -741,7 +741,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EOJ-bC-ARR">
-                                <rect key="frame" x="235" y="225" width="99" height="26"/>
+                                <rect key="frame" x="235" y="239" width="99" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="12" id="ETP-VN-5GA">
                                     <font key="font" metaFont="system"/>
@@ -753,7 +753,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9EB-jj-meS">
-                                <rect key="frame" x="340" y="268" width="99" height="26"/>
+                                <rect key="frame" x="340" y="282" width="99" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="w00-ja-iUp">
                                     <font key="font" metaFont="system"/>
@@ -762,7 +762,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-Q2-hNx">
-                                <rect key="frame" x="236" y="144" width="99" height="26"/>
+                                <rect key="frame" x="236" y="158" width="99" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="所有文件" drawsBackground="YES" completes="NO" numberOfVisibleItems="8" id="592-tF-5JS">
                                     <font key="font" metaFont="system"/>
@@ -781,7 +781,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bh-Wd-qHJ">
-                                <rect key="frame" x="162" y="374" width="4" height="17"/>
+                                <rect key="frame" x="162" y="388" width="4" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="oaG-JQ-tcS">
                                     <font key="font" metaFont="system"/>
@@ -790,7 +790,7 @@
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R9f-4u-pBK">
-                                <rect key="frame" x="233" y="373" width="77" height="20"/>
+                                <rect key="frame" x="233" y="387" width="77" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="粗略选择" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="XCH-7L-dOb">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -801,7 +801,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBf-fr-Re5">
-                                <rect key="frame" x="314" y="373" width="77" height="20"/>
+                                <rect key="frame" x="314" y="387" width="77" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="精确选择" bezelStyle="regularSquare" imagePosition="left" inset="2" id="DOg-aA-eXp">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -812,7 +812,7 @@
                                 </connections>
                             </button>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUL-OG-8y5">
-                                <rect key="frame" x="235" y="325" width="99" height="26"/>
+                                <rect key="frame" x="235" y="339" width="99" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="所有时间" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="4Wd-Uj-aQl">
                                     <font key="font" metaFont="system"/>
@@ -829,7 +829,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7GC-OG-bVv">
-                                <rect key="frame" x="341" y="225" width="99" height="26"/>
+                                <rect key="frame" x="341" y="239" width="99" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="Kyx-fm-Wdt">
                                     <font key="font" metaFont="system"/>
@@ -838,7 +838,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fxk-iB-OZx">
-                                <rect key="frame" x="125" y="369" width="99" height="26"/>
+                                <rect key="frame" x="125" y="383" width="99" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="修改时间" drawsBackground="YES" completes="NO" numberOfVisibleItems="2" id="wOV-4R-qfW">
                                     <font key="font" metaFont="system"/>
@@ -851,7 +851,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UPW-sB-7aL">
-                                <rect key="frame" x="339" y="440" width="89" height="18"/>
+                                <rect key="frame" x="339" y="454" width="89" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="仅匹配标题" bezelStyle="regularSquare" imagePosition="left" inset="2" id="FMg-Hq-ajb">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -859,7 +859,7 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Esz-kI-GIc">
-                                <rect key="frame" x="230" y="35" width="94" height="32"/>
+                                <rect key="frame" x="230" y="49" width="94" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="搜索" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="p5o-QW-UDQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -870,7 +870,7 @@
                                 </connections>
                             </button>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FLk-9v-EHc">
-                                <rect key="frame" x="277" y="92" width="154" height="26"/>
+                                <rect key="frame" x="277" y="106" width="154" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="Nyu-ML-4I6">
                                     <font key="font" metaFont="system"/>
@@ -879,7 +879,7 @@
                                 </comboBoxCell>
                             </comboBox>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jCT-Pf-wSI">
-                                <rect key="frame" x="130" y="96" width="129" height="18"/>
+                                <rect key="frame" x="130" y="110" width="129" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="已保存的搜索条件" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Rg0-fD-onV">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -887,7 +887,7 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bnf-5g-H8Q">
-                                <rect key="frame" x="377" y="34" width="109" height="32"/>
+                                <rect key="frame" x="377" y="48" width="109" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="存储当前搜索条件" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jGx-eD-sXP">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -898,10 +898,24 @@
                                     <segue destination="BfG-hy-OIy" kind="modal" identifier="segue_to_save" id="oXp-LQ-GCf"/>
                                 </connections>
                             </button>
+                            <progressIndicator hidden="YES" wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" minValue="1" maxValue="100" doubleValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="22n-5b-aDC">
+                                <rect key="frame" x="304" y="29" width="16" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </progressIndicator>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GfF-pd-8Ne">
+                                <rect key="frame" x="241" y="29" width="57" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="搜索中" id="LTT-qY-b35">
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="file_type" destination="6d3-Q2-hNx" id="LwN-Ol-ZXQ"/>
+                        <outlet property="loading" destination="22n-5b-aDC" id="axR-2b-xdE"/>
                         <outlet property="md_sel_coarse" destination="R9f-4u-pBK" id="seO-TI-QWB"/>
                         <outlet property="md_start_month" destination="Zde-yW-Lhi" id="hzd-Bm-OvR"/>
                         <outlet property="md_start_year" destination="9EB-jj-meS" id="78J-u1-aHF"/>
@@ -909,6 +923,7 @@
                         <outlet property="md_stop_year" destination="7GC-OG-bVv" id="eaj-1n-2EI"/>
                         <outlet property="md_time_coarse" destination="4Wd-Uj-aQl" id="cpF-Ql-miv"/>
                         <outlet property="name_select" destination="UPW-sB-7aL" id="aX8-OZ-Bdh"/>
+                        <outlet property="run_search" destination="GfF-pd-8Ne" id="S7A-ll-hMS"/>
                         <outlet property="save_list" destination="FLk-9v-EHc" id="3CA-ht-BTM"/>
                         <outlet property="save_list_select" destination="jCT-Pf-wSI" id="dkx-nA-edq"/>
                         <outlet property="save_search" destination="bnf-5g-H8Q" id="JFS-Tq-zWa"/>
@@ -919,7 +934,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-111" y="789.5"/>
+            <point key="canvasLocation" x="-111" y="796.5"/>
         </scene>
         <!--save_view-->
         <scene sceneID="zNk-EJ-NVR">

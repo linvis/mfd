@@ -2,8 +2,8 @@
 //  main.m
 //  mfd
 //
-//  Created by LilyC on 2017/2/5.
-//  Copyright © 2017年 LilyC. All rights reserved.
+//  Created by Shlin on 2017/2/5.
+//  Copyright © 2017年 Shlin. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

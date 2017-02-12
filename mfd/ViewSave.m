@@ -3,12 +3,12 @@
 //  mfd
 //
 //  Created by shlin on 2017/2/11.
-//  Copyright © 2017年 LilyC. All rights reserved.
 //
 
 #import "ViewSave.h"
 
 extern NSString* mfd_data;
+extern NSString* data_path;
 
 @interface ViewSave ()
 
@@ -27,7 +27,7 @@ extern NSString* mfd_data;
         NSLog(@"the key is: %@", str_key);
         NSLog(@"the data is: %@", mfd_data);
         
-        NSString *file_path = @"/Users/shlin/Desktop/GuiSearch.txt";
+        NSString *file_path = [NSString stringWithFormat:@"%@/GuiSearch.txt", data_path];
         NSFileManager *file = [NSFileManager defaultManager];
         if ([file fileExistsAtPath:file_path]) {
             NSLog(@"文件已存在");
@@ -40,14 +40,10 @@ extern NSString* mfd_data;
             }
         }
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:file_path];
-        //2.寻找文件数据位置
         [fileHandle seekToEndOfFile];
-        //3.数据进行编码
         mfd_data = [NSString stringWithFormat:@"GuiSearchkey=%@,data=%@\n", str_key,mfd_data];
-        NSData *data = [mfd_data dataUsingEncoding:NSUTF8StringEncoding];//编码
-        //4.写数据
+        NSData *data = [mfd_data dataUsingEncoding:NSUTF8StringEncoding];
         [fileHandle writeData:data];
-        //5.关闭文件
         [fileHandle closeFile];
         
         [self dismissController:self];

@@ -1,15 +1,17 @@
 //
 //  ViewController.m
-//  mfd
+//  GuiSearch
 //
-//  Created by LilyC on 2017/2/5.
-//  Copyright © 2017年 LilyC. All rights reserved.
+//  Created by Shlin on 2017/2/5.
 //
 
 #import "ViewController.h"
 
 NSString *mfd_data;
 NSMutableDictionary *save_cmd_dict;
+
+NSString *data_path;
+NSString *result_path;
 
 @implementation ViewController
 
@@ -59,73 +61,116 @@ NSMutableDictionary *save_cmd_dict;
 
     save_cmd_dict = [NSMutableDictionary dictionary];
 
-//    NSString *homePath = NSHomeDirectory();//获取根目录
-//    NSLog(@"%@",homePath);
-    NSString *filePath = @"/Users/shlin/Desktop/GuiSearch.txt";//拼接文件路径
-    /*******************读文件********************/
-    //1.实例化文件引用
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-    //2.寻找文件数据位
-    NSUInteger len = [fileHandle availableData].length;//获取数据有效长度
-    NSLog(@"%ld",len);
-    [fileHandle seekToFileOffset:0];//寻找数据一半的地方
-    //3.读取数据
-    NSData *data =[fileHandle readDataToEndOfFile];
-    //4.转换数据
-    NSString *str_data = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"str = %@", str_data);
-    //5.关闭文件
-    [fileHandle closeFile];
+    NSString *filePath = [NSString stringWithFormat:@"%@/GuiSearch.txt", data_path];
     
-    while (1) {
-        if ([str_data length] == 0)
-            break;
-        NSRange range=[str_data rangeOfString:@"\n"];
-        NSString *str_cmd = [str_data substringToIndex:range.location];
-        NSLog(@"cmd name is: %@", str_cmd);
+    NSFileManager *file = [NSFileManager defaultManager];
+    if ([file fileExistsAtPath:filePath]) {
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+        [fileHandle seekToFileOffset:0];
+        NSData *data =[fileHandle readDataToEndOfFile];
+        NSString *str_data = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"str = %@", str_data);
+        [fileHandle closeFile];
         
-        str_cmd = [NSString stringWithFormat:@"%@\n", str_cmd];
-        
-        NSError *error;
-        // 创建NSRegularExpression对象并指定正则表达式
-        NSRegularExpression *regex = [NSRegularExpression
-                                      regularExpressionWithPattern:@"GuiSearchkey=(.*?),data=(.*?)\n"
-                                      options:0
-                                      error:&error];
-        if (!error) { // 如果没有错误
-            // 获取特特定字符串的范围
-            NSTextCheckingResult *match = [regex firstMatchInString:str_cmd
-                                                            options:0
-                                                              range:NSMakeRange(0, [str_cmd length])];
-            if (match) {
-                // 截获特定的字符串
-                    //NSRange matchRange = [match range];
-                NSRange matchRange = [match rangeAtIndex:1];
-                NSString *key = [str_cmd substringWithRange:matchRange];
-                NSLog(@"key = %@", key);
-                [self.save_list addItemWithObjectValue: key];
-                
-                
-                matchRange = [match rangeAtIndex:2];
-                NSString *cmd = [str_cmd substringWithRange:matchRange];
-                NSLog(@"cmd = %@", cmd);
-                
-                [save_cmd_dict setObject:cmd forKey:key];
+        while (1) {
+            if ([str_data length] == 0)
+                break;
+            NSRange range=[str_data rangeOfString:@"\n"];
+            NSString *str_cmd = [str_data substringToIndex:range.location];
+            NSLog(@"cmd name is: %@", str_cmd);
+            
+            str_cmd = [NSString stringWithFormat:@"%@\n", str_cmd];
+            
+            NSError *error;
+            NSRegularExpression *regex = [NSRegularExpression
+                                          regularExpressionWithPattern:@"GuiSearchkey=(.*?),data=(.*?)\n"
+                                          options:0
+                                          error:&error];
+            if (!error) { 
+                NSTextCheckingResult *match = [regex firstMatchInString:str_cmd
+                                                                options:0
+                                                                  range:NSMakeRange(0, [str_cmd length])];
+                if (match) {
+                    NSRange matchRange = [match rangeAtIndex:1];
+                    NSString *key = [str_cmd substringWithRange:matchRange];
+                    NSLog(@"key = %@", key);
+                    [self.save_list addItemWithObjectValue: key];
+                    
+                    
+                    matchRange = [match rangeAtIndex:2];
+                    NSString *cmd = [str_cmd substringWithRange:matchRange];
+                    NSLog(@"cmd = %@", cmd);
+                    
+                    [save_cmd_dict setObject:cmd forKey:key];
+                }
+            } else {
+                NSLog(@"error - %@", error);
             }
-        } else { // 如果有错误，则把错误打印出来
-            NSLog(@"error - %@", error);
+            
+            str_data = [str_data substringFromIndex:(range.location + 1)];
         }
-        
-        str_data = [str_data substringFromIndex:(range.location + 1)];
+        NSString *tmp = [self.save_list itemObjectValueAtIndex:0];
+        [self.save_list setStringValue:tmp];
+    } else {
+        NSLog(@"no file to show");
     }
-    NSString *tmp = [self.save_list itemObjectValueAtIndex:0];
-    [self.save_list setStringValue:tmp];
 }
 
+- (void)check_file_path {
+    NSString *home_path = [self performSelector:@selector(run_cmd:) withObject:@"echo $HOME"];
+    home_path = [home_path stringByReplacingOccurrencesOfString :@"\n" withString:@"/"];
+    NSLog(@"home path is %@", home_path);
+    
+    home_path = [NSString stringWithFormat:@"%@GuiSearch",home_path];
+    
+    NSFileManager *file = [NSFileManager defaultManager];
+    if ([file fileExistsAtPath:home_path]) {
+        NSLog(@"文件已存在");
+    } else {
+        BOOL sucess = [file createDirectoryAtPath:home_path withIntermediateDirectories:YES attributes:nil error:NULL];
+        if (sucess == 1) {
+            NSLog(@"文件创建成功");
+        }else{
+            NSLog(@"文件创建失败");
+        }
+    }
+    
+    data_path = [NSString stringWithFormat:@"%@/data", home_path];
+    if ([file fileExistsAtPath:data_path]) {
+        NSLog(@"文件已存在");
+    } else {
+        BOOL sucess = [file createDirectoryAtPath:data_path withIntermediateDirectories:YES attributes:nil error:NULL];
+        if (sucess == 1) {
+            NSLog(@"文件创建成功");
+        }else{
+            NSLog(@"文件创建失败");
+        }
+    }
+    
+    result_path = [NSString stringWithFormat:@"%@/search_result", home_path];
+    if ([file fileExistsAtPath:result_path]) {
+        NSLog(@"文件已存在");
+    } else {
+        BOOL sucess = [file createDirectoryAtPath:result_path withIntermediateDirectories:YES attributes:nil error:NULL];
+        if (sucess == 1) {
+            NSLog(@"文件创建成功");
+        }else{
+            NSLog(@"文件创建失败");
+        }
+    }
+    
+    
+}
+
+NSThread *parse_thread;
+NSString *str_file;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self performSelector:@selector(check_file_path)];
     [self performSelector:@selector(combobox_init)];
     [self performSelector:@selector(save_list_combobox_init)];
+    
+    parse_thread = [[NSThread alloc]initWithTarget:self selector:@selector(parse_file_list:) object:str_file];
     // Do any additional setup after loading the view.
 }
 
@@ -159,9 +204,6 @@ NSMutableDictionary *save_cmd_dict;
 }
 
 - (NSString*)run_mdfind_cmd:(NSString*)input {
-    //NSString *base_cmd = @"/Users/shlin/workspace/mac_app/mfd/mfd_script/mfd";
-    
-    
     NSString *str_mdf_cmd = [NSString stringWithFormat: @"mdfind \'%@\'", input];
     
     NSLog(@"the mdfind command is: %@", str_mdf_cmd);
@@ -173,11 +215,10 @@ NSMutableDictionary *save_cmd_dict;
 
 - (NSString*)run_ln_cmd:(NSString*)input {
     NSString *base_cmd_1 = @"ln -s";
-    NSString *base_cmd_2 = @"/Users/shlin/Desktop/atest";
+    NSString *base_cmd_2 = result_path;
     
     NSString *cmd;
 
-    //NSLog(@"cmd is: %@", cmd);
     input = [input stringByReplacingOccurrencesOfString :@" " withString:@"\\ "];
     input = [input stringByReplacingOccurrencesOfString :@"-" withString:@"\\-"];
     input = [input stringByReplacingOccurrencesOfString :@"&" withString:@"\\&"];
@@ -214,7 +255,7 @@ NSMutableDictionary *save_cmd_dict;
         if ([self.text_kw stringValue].length != 0) {
             str_kw = [self.text_kw stringValue];
             if ([self.name_select state] == 0) {
-                str_combo_cmd = [NSString stringWithFormat: @"(true) && kMDItemTextContent == \"%@\"cdw", str_kw];
+                str_combo_cmd = [NSString stringWithFormat: @"(true) && kMDItemTextContent == \"%@\" || kMDItemFSName ==\"*%@*\"cdw", str_kw, str_kw];
                 NSLog(@"keyword is: %@", str_combo_cmd);
             } else {
                 str_combo_cmd = [NSString stringWithFormat: @"(true) && kMDItemFSName ==\"*%@*\"cdw", str_kw];
@@ -420,13 +461,15 @@ NSMutableDictionary *save_cmd_dict;
     return str_mfd_cmd;
 }
 
-- (IBAction)button_click:(id)sender {
+NSInteger parse_thread_flag;
+- (void)parse_file_list:(NSString*)file_list {
+    file_list = str_file;
     
-    NSString *command = [self performSelector:@selector(parse_mfd_cmd)];
     
-    NSString *file_list = [self performSelector:@selector(run_cmd:) withObject:command];
+    NSString *clear = [NSString stringWithFormat:@"rm -r %@", result_path];
+    NSString *result_clear = [self performSelector:@selector(run_cmd:) withObject:clear];
     
-    NSLog(@"file list is:%@", file_list);
+    [self performSelector:@selector(check_file_path)];
     
     while (1) {
         if ([file_list length] == 0)
@@ -444,9 +487,40 @@ NSMutableDictionary *save_cmd_dict;
         file_list = [file_list substringFromIndex:(range.location + 1)];
     }
     
+    
+    [self.run_search setStringValue:@"搜索完成"];
+    [self.loading stopAnimation:nil];
+    
     //open the finder
-    NSString *file_url = @"open /Users/shlin/Desktop/atest";
+    NSString *file_url = [NSString stringWithFormat:@"open %@", result_path];
     NSString *result = [self performSelector:@selector(run_cmd:) withObject:file_url];
+}
+
+- (IBAction)button_click:(id)sender {
+    
+    NSString *command = [self performSelector:@selector(parse_mfd_cmd)];
+    
+    NSString *file_list = [self performSelector:@selector(run_cmd:) withObject:command];
+    
+    
+    NSLog(@"file list is:%@", file_list);
+    str_file = file_list;
+    
+    [self.run_search setHidden:NO];
+    [self.loading setHidden:NO];
+    [self.loading setIndeterminate:YES];
+    [self.loading setUsesThreadedAnimation:YES];
+    [self.loading startAnimation:nil];
+    
+    if (parse_thread.isExecuting) {
+//        if (!parse_thread.isFinished) {
+            [parse_thread cancel];
+//        }
+    }
+    
+    parse_thread = [[NSThread alloc]initWithTarget:self selector:@selector(parse_file_list:) object:str_file];
+    [parse_thread start];
+    
 }
 
 
@@ -470,17 +544,6 @@ NSMutableDictionary *save_cmd_dict;
 
 - (IBAction)save_seach_click:(id)sender {
     //save the seach command
-    NSLog(@"fuck you");
-    
-#if 0
-#endif
-    
-//    NSAlert *alert = [[NSAlert alloc] init];
-//    [alert addButtonWithTitle:@"Cancle"];
-//    [alert addButtonWithTitle:@"OK"];
-//    [alert informativeText];
-//    [alert runModal];
-
 }
 
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
