@@ -10,6 +10,7 @@
 NSString *mfd_data;
 NSMutableDictionary *save_cmd_dict;
 
+NSString *home_path;
 NSString *data_path;
 NSString *result_path;
 
@@ -51,6 +52,7 @@ NSString *result_path;
         [self.md_stop_year addItemWithObjectValue: str_year];
     }
     
+#if 0
     //init tags select
     NSString *tags_cmd = [NSString stringWithFormat: @"defaults read com.apple.finder.plist ViewSettingsDictionary | grep -E \'.*_Tag_ViewSettings\'"];
     
@@ -96,12 +98,24 @@ NSString *result_path;
         }
         tags_result = [tags_result substringFromIndex:(range.location + 1)];
     }
-//    NSString *tmp = @"no tag";
-//    [self.tags_select setStringValue:tmp];
-    //[self.mod_start_time selectItemAtIndex:2];
-    //[self.mod_start_time setStringValue:na];
-    //[self.mod_start_time addItemWithObjectValue:@"red"];
-    //[self.mod_start_time selectItemWithObjectValue:na];
+#endif
+    
+    //init tags option
+    NSString *filePath = [NSString stringWithFormat:@"%@Library/SyncedPreferences/com.apple.finder.plist", home_path];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+        NSArray *plistArray = plistDict[@"values"][@"FinderTagDict"][@"value"][@"FinderTags"];
+        
+        for (int i = 0; i < [plistArray count]; i++) {
+            NSString *tag = [plistArray[i] objectForKey:@"n"];
+            [self.tags_select addItemWithObjectValue: tag];
+        }
+    } else {
+        NSLog(@"plist file does not exsit");
+    }
+    
+    NSString *tmp = @"no tag";
+    [self.tags_select setStringValue:tmp];
 }
 
 - (void)save_list_combobox_init {
@@ -164,14 +178,14 @@ NSString *result_path;
 }
 
 - (void)check_file_path {
-    NSString *home_path = [self performSelector:@selector(run_cmd:) withObject:@"echo $HOME"];
+    home_path = [self performSelector:@selector(run_cmd:) withObject:@"echo $HOME"];
     home_path = [home_path stringByReplacingOccurrencesOfString :@"\n" withString:@"/"];
     NSLog(@"home path is %@", home_path);
     
-    home_path = [NSString stringWithFormat:@"%@GuiSearch",home_path];
+    NSString *tmp_path = [NSString stringWithFormat:@"%@GuiSearch",home_path];
     
     NSFileManager *file = [NSFileManager defaultManager];
-    if ([file fileExistsAtPath:home_path]) {
+    if ([file fileExistsAtPath:tmp_path]) {
         NSLog(@"文件已存在");
     } else {
         BOOL sucess = [file createDirectoryAtPath:home_path withIntermediateDirectories:YES attributes:nil error:NULL];
@@ -182,7 +196,7 @@ NSString *result_path;
         }
     }
     
-    data_path = [NSString stringWithFormat:@"%@/data", home_path];
+    data_path = [NSString stringWithFormat:@"%@/data", tmp_path];
     if ([file fileExistsAtPath:data_path]) {
         NSLog(@"文件已存在");
     } else {
