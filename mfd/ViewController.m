@@ -51,6 +51,53 @@ NSString *result_path;
         [self.md_stop_year addItemWithObjectValue: str_year];
     }
     
+    //init tags select
+    NSString *tags_cmd = [NSString stringWithFormat: @"defaults read com.apple.finder.plist ViewSettingsDictionary | grep -E \'.*_Tag_ViewSettings\'"];
+    
+    NSString *tags_result = [self performSelector:@selector(run_cmd:) withObject:tags_cmd];
+    
+    while(1) {
+        if ([tags_result length] == 0)
+            break;
+        NSRange range=[tags_result rangeOfString:@"\n"];
+        NSString *tags = [tags_result substringToIndex:range.location];
+        NSLog(@"tags is: %@", tags);
+        
+        tags = [NSString stringWithFormat:@"%@\n", tags_result];
+        NSError *error;
+        NSRegularExpression *regex = [NSRegularExpression
+                                      regularExpressionWithPattern:@"\"(.*)_Tag_ViewSettings"
+                                      options:0
+                                      error:&error];
+        if (!error) { 
+            NSTextCheckingResult *match = [regex firstMatchInString:tags
+                                                            options:0
+                                                              range:NSMakeRange(0, [tags length])];
+            if (match) {
+                NSRange matchRange = [match rangeAtIndex:1];
+                NSString *key = [tags substringWithRange:matchRange];
+               
+                key = [key stringByReplacingOccurrencesOfString :@"\\\\U" withString:@"\\u"];
+                
+                NSString* esc1 = [key stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];
+                NSString* esc2 = [esc1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+                NSString* quoted = [[@"\"" stringByAppendingString:esc2] stringByAppendingString:@"\""];
+                NSData* data = [quoted dataUsingEncoding:NSUTF8StringEncoding];
+                NSString* unesc = [NSPropertyListSerialization propertyListFromData:data
+                                                                   mutabilityOption:NSPropertyListImmutable format:NULL
+                                                                   errorDescription:NULL];
+                assert([unesc isKindOfClass:[NSString class]]);
+                NSLog(@"Output = %@", unesc);
+                
+                [self.tags_select addItemWithObjectValue: unesc];
+            }
+        } else {
+            NSLog(@"error - %@", error);
+        }
+        tags_result = [tags_result substringFromIndex:(range.location + 1)];
+    }
+//    NSString *tmp = @"no tag";
+//    [self.tags_select setStringValue:tmp];
     //[self.mod_start_time selectItemAtIndex:2];
     //[self.mod_start_time setStringValue:na];
     //[self.mod_start_time addItemWithObjectValue:@"red"];
@@ -450,6 +497,22 @@ NSString *str_file;
                 }
                 str_combo_cmd = [NSString stringWithFormat:@"%@ && (%@)", str_combo_cmd, str_file_type];
             }
+        }
+        
+        //tags
+        {
+            NSInteger index;
+            index = [self.tags_select indexOfSelectedItem];
+            index = (index == -1) ? 0 : index;
+            
+            if (index == 0) {
+               //do nothing
+            } else {
+                NSString *tag = [self.tags_select itemObjectValueAtIndex:index];
+                tag = [NSString stringWithFormat:@"kMDItemUserTags = %@", tag];
+                str_combo_cmd = [NSString stringWithFormat:@"%@ && (%@)", str_combo_cmd, tag];
+            }
+            
         }
         
         str_mfd_cmd = [NSString stringWithFormat: @"mdfind \'%@\'", str_combo_cmd];

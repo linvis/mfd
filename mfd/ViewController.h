@@ -45,5 +45,7 @@
 @property (strong) IBOutlet NSProgressIndicator *loading;
 @property (strong) IBOutlet NSTextField *run_search;
 
+@property (strong) IBOutlet NSComboBox *tags_select;
+
 @end
 
